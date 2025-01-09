@@ -1,3 +1,7 @@
+num_of_processes() {
+    echo "$(ps auxh | wc -l)"
+}
+
 echo 'Welcome'
 PS3='~Select an option: '
 options=('Show current stats' 'Show last 5 backup logs' 'Perform backup' 'Perform cleanup' 'Show the number of running processes' 'Quit')
@@ -16,7 +20,7 @@ select option in "${options[@]}"; do
         /usr/local/bin/sprite.sh
         ;;
     "${options[4]}")
-        launch_dont_know_function
+        num_of_processes
         ;;
     "${options[5]}")
         exit 0
