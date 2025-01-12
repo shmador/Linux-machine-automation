@@ -35,29 +35,28 @@ if [[ -t 0 ]]; then
         last_res=$(tail -1 "$file_name")
         read -r -a res_a <<<"$res"
         read -r -a last_a <<<"$last_res"
-        current_cpu="${res_a[2]}"
-        last_cpu="${last_a[2]}"
+        current_cpu="${res_a[-2]}"
+        last_cpu="${last_a[-2]}"
         cpu_change=""
-        if (( current_cpu == last_cpu )); then
+        if [[ "$current_cpu" == "$last_cpu" ]]; then
             cpu_change="same cpu usage"
-        elif (( current_cpu > last_cpu)); then
+        elif [[ "$current_cpu" > "$last_cpu" ]]; then
             cpu_change="more cpu usage"
         else
             cpu_change="less cpu usage"
         fi
-        current_ram="${res_a[3]}"
-        last_ram="${last_a[3]}"
+        current_ram="${res_a[-3]}"
+        last_ram="${last_a[-3]}"
         ram_change=""
-        if ((current_ram == last_ram)); then
-            same_ram="same ram usage"
-        elif ((current_ram > last_ram)); then
+        if [[ "$current_ram" == "$last_ram" ]]; then
+            ram_change="same ram usage"
+        elif [[ "$current_ram" > "$last_ram" ]]; then
             ram_change="more ram usage"
         else
             ram_change="less ram usage"
         fi
-        echo "$cpu_change current: $current_cpu% last: $last_cpu%"
-        echo "$ram_change current: $current_ram% last: $last_ram%" 
-        echo "from ${last_a[1]}"
+        echo "$cpu_change. current: $current_cpu% last: $last_cpu%"
+        echo "$ram_change. current: $current_ram% last: $last_ram%" 
     fi
 else
     echo $res >> /var/log/monitor.log
