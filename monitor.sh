@@ -35,8 +35,8 @@ if [[ -t 0 ]]; then
         last_res=$(tail -1 "$file_name")
         read -r -a res_a <<<"$res"
         read -r -a last_a <<<"$last_res"
-        current_cpu="${res_a[-2]}"
-        last_cpu="${last_a[-2]}"
+        current_cpu="${res_a[-4]}"
+        last_cpu="${last_a[-4]}"
         cpu_change=""
         if [[ "$current_cpu" == "$last_cpu" ]]; then
             cpu_change="same cpu usage"
