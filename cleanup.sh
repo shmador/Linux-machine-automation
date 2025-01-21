@@ -28,7 +28,7 @@ remove_file() {
 dir_a=( "/tmp" "/var/tmp" "/var/log" )
 for dir in ${dir_a[@]}; do
     to_remove="$dir"
-    remove_file()
+    remove_file
 done
 
 
