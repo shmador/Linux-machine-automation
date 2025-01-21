@@ -13,16 +13,16 @@ options=('Show current stats' 'Show last 5 backup logs' 'Perform backup' 'Perfor
 select option in "${options[@]}"; do
     case $option in
     "${options[0]}")
-        /usr/local/bin/serve_falafel.sh
+        /usr/local/bin/monitor.sh
         ;;
     "${options[1]}")
-        /usr/local/bin/create_glida.sh taim_args
+        /usr/local/bin/backup.sh l
         ;;
     "${options[2]}")
-        /usr/local/bin/shawarma_good.sh
+        /usr/local/bin/backup.sh
         ;;
     "${options[3]}")
-        /usr/local/bin/sprite.sh
+        /usr/local/bin/cleanup.sh
         ;;
     "${options[4]}")
         num_of_processes
