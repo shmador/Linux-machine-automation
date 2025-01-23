@@ -11,10 +11,10 @@ free_space=$(df --output=avail / | tail -1)
 format="+%Y_%m_%d_%H_%M_%S"
 current_date_time="$(date "$format")"
 message=""
-backup_dir="/opt/sysmonitor/backups/"
+backup_dir="/opt/sysmonitor/backups"
 log_path="/var/log/backup.log"
 if [[ "$dir_size" -lt "$free_space" ]]; then
-    DESTINATION="${backup_dir}${current_date_time}_home_backup.tar.gz"
+    DESTINATION="${backup_dir}/${current_date_time}_home_backup.tar.gz"
     tar czf "$DESTINATION" --ignore-failed-read "$TARGET" 2>/dev/null 2>&1
     message="successful backup $current_date_time"
 else
@@ -23,10 +23,12 @@ fi
 echo "$message" >> "$log_path"
 #remove old backups
 for file in "$backup_dir"/*; do
-    last_modification_seconds=$(stat --format=%Y "$file")
-    last_modfication_in_days=$((($(date +%s) - last_modification_seconds) / 86400))
-    if [[ "$last_modfication_in_days" -gt 7 ]]; then
-        rm -f "$file"
+    if [[ -f "$file" ]]; then
+        last_modification_seconds=$(stat --format=%Y "$file")
+        last_modfication_in_days=$((($(date +%s) - last_modification_seconds) / 86400))
+        if [[ "$last_modfication_in_days" -gt 7 ]]; then
+            rm -f "$file"
+        fi
     fi
 done
 #display last 5 logs
