@@ -32,7 +32,7 @@ if [[ $1 != "l" ]]; then
             fi
         fi
     done
-elif [[ -t 0 && $1 == 'l' ]]; then
+elif [[ -t 0 ]]; then
     if [[ ! -s "$log_path" ]]; then
         echo "no current logs found"
     else
