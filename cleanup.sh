@@ -16,7 +16,6 @@ remove_file() {
                     size_in_bytes="${size_in_bytes_a[0]}"
                     size_limit=$(( 10 * 1024 * 1024 ))
                     if [[ "$size_in_bytes" -gt "$size_limit" ]]; then
-                        echo test
                         read -p "$file is bigger then 10 MiB. Delete anyways?(y/n) " confirm
                         if [[ ${confirm^^} != "Y" ]]; then
                             continue
